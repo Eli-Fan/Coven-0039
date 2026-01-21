@@ -1,0 +1,47 @@
+h1 {
+    color:silver;
+}
+
+body{
+    width:53%;
+    margin:auto;
+    background-color: black
+}
+
+p{
+    color:white
+}
+
+
+
+#intro{}
+
+/* for phones */
+@media (orientation: portrait){
+    body {
+        width:100%;
+        font-size: 0.7em;
+    }
+}
+
+#Byline {
+    color: rgb(170, 0, 0);
+    margin-bottom: 20px;
+}
+
+body{
+    border: 5px solid rgb(127, 0, 0);
+    padding: 3px
+}
+
+body{
+    border: 5px solid rgb(127, 0, 0);
+}
+
+img{
+    border: 2px solid rgb(127, 0, 0);
+}
+
+div {
+    border: 1px solid rgb(127, 0, 0);
+}
