@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title>The Witch Condition Chapters</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: black
+    }
+
+    .container {
+      width: 90%;
+      margin: 10px auto;
+      padding-top: 50px;
+      
+    }
+
+    .step {
+      min-height: 100vh; /* each step fills the viewport */
+      display: flex;
+      flex-direction: column;;
+      align-items: left;
+      justify-content: center;
+      gap: 16px;
+      font-size: 7em;
+      border-bottom : 1px solid #ccc;
+      transition: background-color 0.3s, color 0.3s;
+  
+    }
+
+    .step.is-active {
+      background-color:black;
+      color: #fff;
+    }
+
+    .step img {
+  display: none;
+}
+
+.step.is-active img {
+display: block;
+width: 100%;
+  max-width: 900px;
+  margin: auto;
+  height: auto;
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="step"><img src="Chapter1.png" /> Chapter 1
+    </div>
+    <div class="step"><img src="Chapter2.png" /> Chapter 2
+    </div>
+    <div class="step"><img src="Chapter3.png" /> Chapter 3
+    </div>
+  </div>
+
+  <!-- scrollama from CDN -->
+  <script src="https://unpkg.com/scrollama"></script>
+
+  <script>
+    // create the scrollama instance
+    const scroller = scrollama();
+
+    // setup and bind events
+    scroller
+      .setup({
+        step: ".step",
+        offset: 0.5  // trigger in the middle of the viewport
+      })
+      .onStepEnter(response => {
+        response.element.classList.add("is-active");
+      })
+      .onStepExit(response => {
+        response.element.classList.remove("is-active");
+      });
+
+    // handle window resizes
+    window.addEventListener("resize", scroller.resize);
+  </script>
+</body>
+</html>

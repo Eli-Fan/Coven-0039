@@ -1,0 +1,63 @@
+<html>
+<head>
+  <title>Minimal Scrollama Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .container {
+      width: 60%;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+
+    .step {
+      min-height: 100vh; /* each step fills the viewport */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      border-bottom: 1px solid #ccc;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .step.is-active {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="step">Step 1: Hello</div>
+    <div class="step">Step 2: Scroll</div>
+    <div class="step">Step 3: World</div>
+  </div>
+
+  <!-- scrollama from CDN -->
+  <script src="https://unpkg.com/scrollama"></script>
+
+  <script>
+    // create the scrollama instance
+    const scroller = scrollama();
+
+    // setup and bind events
+    scroller
+      .setup({
+        step: ".step",
+        offset: 0.5  // trigger in the middle of the viewport
+      })
+      .onStepEnter(response => {
+        response.element.classList.add("is-active");
+      })
+      .onStepExit(response => {
+        response.element.classList.remove("is-active");
+      });
+
+    // handle window resizes
+    window.addEventListener("resize", scroller.resize);
+  </script>
+</body>
+</html>
