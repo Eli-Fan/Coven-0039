@@ -1,0 +1,259 @@
+/* Workshopped and Learned some new CSS rules from AI to make the page look better */
+
+:root{
+  --bg: #6d6d6d;
+  --fg: #f2f2f2;
+  --muted: rgba(242,242,242,.72);
+  --grey: #6d6d6d;
+  --max: 1200px;
+  --gap: 18px;
+  --fadeMs: 700ms;
+}
+
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+img, video { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--fg); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.page .container,
+.project .container { width: min(var(--max), 92vw); margin: 0 auto; padding: 48px 0; }
+
+.h1 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 16px; }
+.h2 { font-size: clamp(18px, 2.2vw, 24px); margin: 0 0 10px; }
+.p  { line-height: 1.6; font-size: 16px; margin: 0 0 14px; }
+.subtle { color: var(--muted); }
+
+/* TOPBAR */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 4vw;
+  background: rgba(70, 70, 70, 0.701);
+  backdrop-filter: blur(8px);
+}
+
+.topbar--overlay{
+  position: fixed;
+  width: 100%;
+  background: rgba(71, 70, 70, 0.25);
+}
+
+.brand{
+  letter-spacing: .18em;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav a{
+  margin-left: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.nav a[aria-current="page"]{ color: var(--fg); }
+
+/* ABOUT / PROJECTS */
+.about-grid{
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.projects-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+.project-tile{
+  border: 1px solid rgba(242,242,242,.18);
+  border-radius: 16px;
+  overflow: hidden;
+  display: block;
+}
+.project-tile img{
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+}
+.tile-meta{
+  padding: 12px 14px 14px;
+}
+.tile-title{ font-weight: 600; }
+.tile-sub{ color: var(--muted); font-size: 14px; }
+
+/* PROJECT: COVERS + CHAPTERS */
+.cover{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12vh 8vw;
+  position: relative;
+  transition: opacity var(--fadeMs) ease;
+}
+
+.cover--story{
+  background: var(--grey);
+  color: #ffffff;
+}
+.cover--image{
+  background-size: cover;
+  background-position: center;
+}
+
+.cover-inner{
+  width: min(860px, 92vw);
+}
+
+.headline{
+  font-size: clamp(40px, 6vw, 86px);
+  letter-spacing: .02em;
+  margin: 0 0 14px;
+}
+.subhead{
+  color: rgba(255,255,255,.82);
+  margin: 0 0 18px;
+}
+.hint{
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+}
+
+.chapter-title{
+  font-size: clamp(24px, 3.4vw, 44px);
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+}
+
+/* Fade */
+.fade-out{
+  opacity: 0;
+}
+
+/* Step markers for Scrollama: first set to be 1 and tht was too small so scrollama didnt work, just a lesson to learn*/
+.step{
+  height: 20vh;
+  width: 100%;
+}
+
+
+/* default transition */
+.cover,
+.chapter-inner {
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+
+/* content hidden state */
+.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+/* Chapter content */
+.chapter{
+  padding: 54px 0 70px;
+  background-color: #6d6d6d;
+}
+.chapter-inner{
+  width: min(var(--max), 92vw);
+  margin: 0 auto;
+}
+.chapter-meta{
+  margin-bottom: 18px;
+}
+
+/* Media */
+.media{
+  border-radius: 12px;
+  border: 1px solid rgba(242,242,242,.14);
+  background: rgba(108, 107, 107, 0.03);
+}
+.video{
+  width: 100%;
+  height: auto;
+}
+
+/* flex in the content */
+.grid-row{
+  display: flex;
+  gap: var(--gap);
+  align-items: flex-start;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  min-width: 0;
+}
+
+.col--text{
+  flex: 1.1;
+}
+.col--stack{
+  flex: 1;
+}
+
+.row{
+  display: flex;
+  gap: var(--gap);
+  min-width: 0;
+}
+.row--two > *{
+  flex: 1;
+  min-width: 0;
+}
+
+.row--cluster{
+  align-items: flex-start;
+}
+.row--cluster > img{
+  flex: 1.2;
+  min-width: 0;
+}
+
+/* Chapter-specific proportions */
+.grid-row--ch1 .col--text{ flex: 0.9; }
+.grid-row--ch2 > .col{ flex: 1; }
+.grid-row--ch3 .col--text{ flex: 0.9; }
+
+/* FOOTER */
+.footer{
+  width: min(var(--max), 92vw);
+  margin: 0 auto;
+  padding: 28px 0 44px;
+  color: var(--muted);
+}
+.footer--project{
+  padding-top: 30px;
+  border-top: 1px solid rgba(242,242,242,.12);
+}
+
+/* Mob */
+@media (max-width: 900px){
+  .about-grid{ flex-direction: column; }
+  .about-card{ flex: 1 1 auto; }
+
+  .projects-grid{ grid-template-columns: 1fr; }
+
+  .grid-row{ flex-direction: column; }
+  .row{ flex-direction: column; }
+}
+
+@media (orientation: portrait){
+    body {
+        width:100%;
+        font-size: 2.3em;
+    }
+}
